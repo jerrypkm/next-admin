@@ -15,8 +15,6 @@ npx prisma init
 
 4. Replace the enviroment variables as required in .env file
 
-5. Execute SEED to [create local DB](localhost:3000/api/seed/)
-
 5. Create modules and run the server test
 
 ```bash
@@ -29,11 +27,22 @@ pnpm dev
 bun dev
 ```
 
-migrate is used to update changes every time our models changes
-generate is used to get the code to start working with Prisma
+6. Execute prisma commands to migrate and generate the DB based on or prisma schema
+
+```bash
+npx prisma migrate dev
+npx prisma generate
+```
+
+6. Execute SEED to [create local DB](localhost:3000/api/seed/)
+
+
+
 ## Prisma commands
 ```bash
 npx prisma init
 npx prisma migrate dev
 npx prisma generate
 ```
+migrate is used to update changes every time our models changes
+generate is used to get the code to start working with Prisma
