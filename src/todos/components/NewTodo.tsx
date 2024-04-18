@@ -1,32 +1,37 @@
 'use client';
 import { FormEvent, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-import * as todosApi from '@/todos/helpers'
-import { useRouter } from "next/navigation";
+// import * as todosApi from '@/todos/helpers'
+// import { useRouter } from "next/navigation";
+import { createTodo, deleteCompleted } from "../actions/todo-actions";
 
 export const NewTodo = () => { 
 
   const [description, setDescription] = useState("")
-  const router = useRouter();
+  // const router = useRouter();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if(description.trim().length === 0) return
 
 
-    const todoCreated = await todosApi.createTodo(description);
+    // const todoCreated = await todosApi.createTodo(description);
+    // setDescription("");
+    // console.log(todoCreated)
+
+    // router.refresh()
+
+    const todoCreated = await createTodo(description)
     setDescription("");
     console.log(todoCreated)
 
-    router.refresh()
-
   }
 
-  const deleteCompleted = async () => {
-    const completed = await todosApi.deleteCompletedTodos();
-    console.log(completed, "se borraron datos")
-    router.refresh();
-  }
+  // const deleteCompleted = async () => {
+  //   const completed = await todosApi.deleteCompletedTodos();
+  //   console.log(completed, "se borraron datos")
+  //   router.refresh();
+  // }
 
   return (
     <form onSubmit={onSubmit}  className='flex w-full'>
@@ -44,7 +49,7 @@ export const NewTodo = () => {
       <span className='flex flex-1'></span>
 
       <button 
-        onClick={ deleteCompleted }
+        onClick={ () => deleteCompleted() }
         type='button' 
         className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all">
         <IoTrashOutline />
