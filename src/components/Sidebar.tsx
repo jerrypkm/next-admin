@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { CiBookmarkCheck, CiLogout } from 'react-icons/ci'
+import { CiLogout } from 'react-icons/ci'
 import { SidebarItem } from '.'
-import { IoCalendarOutline, IoCheckboxOutline, IoListOutline } from 'react-icons/io5'
+import { IoCalendarOutline, IoCheckboxOutline, IoListOutline, IoStorefrontOutline } from 'react-icons/io5'
+import { PiCookieDuotone } from 'react-icons/pi'
 
 const sidebarItems = [
   {
@@ -20,6 +21,16 @@ const sidebarItems = [
     href: "/dashboard/server-todos",
     label: "Server actions",
     icon: <IoListOutline size={30} />
+  },
+  {
+    href: "/dashboard/cookies",
+    label: "Cookies use",
+    icon: <PiCookieDuotone size={30} />
+  },
+  {
+    href: "/dashboard/products",
+    label: "Products page",
+    icon: <IoStorefrontOutline size={30} />
   }
 ]
 
