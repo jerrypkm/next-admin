@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache"
 import { Todo } from "@prisma/client"
 import prisma from "@/app/lib/prisma"
 import { boolean, object, string } from "yup"
+import { getSessionServer } from "@/auth/actions/auth-actions"
 
 export const sleep = async (secons: number) => {
   return new Promise(resolve => {
@@ -43,8 +44,8 @@ const postSchema = object({
 
 export const createTodo = async (description: string) => { 
   try{
-
-    const todo = await prisma.todo.create({data: { description }})
+    const user = await getSessionServer();
+    const todo = await prisma.todo.create({data: { description, userId: user?.id! }})
     revalidatePath('/dashboard/server-todos')
 
     return todo
@@ -59,9 +60,11 @@ export const createTodo = async (description: string) => {
 
 export const deleteCompleted = async (): Promise<void> => {
   try{
+    const user = await getSessionServer();
     await prisma.todo.deleteMany({
       where: {
-        complete: true
+        complete: true,
+        userId: user?.id,
       }
     })
     revalidatePath('/dashboard/server-todos')

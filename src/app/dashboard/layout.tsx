@@ -1,10 +1,19 @@
+import { auth } from '@/auth';
 import { Sidebar, TopMenu } from '@/components';
+import { redirect } from 'next/navigation';
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children
 }: {
   children: React.ReactNode;
 }) {
+
+  const session = await auth();
+
+  if(!session) {
+    redirect('/api/auth/signin')
+  }
+
   return (
     <>
       <Sidebar></Sidebar>

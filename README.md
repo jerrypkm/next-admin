@@ -34,7 +34,11 @@ npx prisma migrate dev
 npx prisma generate
 ```
 
-6. Execute SEED to [create local DB](localhost:3000/api/seed/)
+7. Execute SEED to [create local DB](localhost:3000/api/seed/)
+
+## Nota: Usuario por defecto
+__user:__ test1@google.com
+__password:__ 123456
 
 
 
